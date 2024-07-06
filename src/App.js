@@ -12,7 +12,7 @@ const App = () => {
     <ApiProvider>
       <Navbar/>
       <div className="bg-custom-graywhite">
-        <h1 className='font-bold'>Departmental List</h1>
+        <h1 className='font-bold py-6 px-8'>Departmental List</h1>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
         {!loading && !error && <DataTable data={data} />}
