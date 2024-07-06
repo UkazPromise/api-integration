@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import DataTable from './components/DataTable';
+import { ApiProvider } from './context/ApiContext';
+import ApiContext from './context/ApiContext';
+import Navbar from './components/Navbar';
 
-function App() {
+const App = () => {
+  const { state } = useContext(ApiContext);
+  const { data, loading, error } = state;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApiProvider>
+      <Navbar/>
+      <div className="bg-custom-graywhite">
+        <h1 className='font-bold'>Departmental List</h1>
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
+        {!loading && !error && <DataTable data={data} />}
+      </div>
+    </ApiProvider>
   );
-}
+};
 
 export default App;
